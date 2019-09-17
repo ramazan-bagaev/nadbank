@@ -35,6 +35,23 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>clean all</id>
+                        <phase>pre-clean</phase>
+                        <configuration>
+                            <tasks>
+                                <delete dir="build"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 
         </plugins>
