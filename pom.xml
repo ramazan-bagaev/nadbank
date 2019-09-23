@@ -23,5 +23,6 @@
     <modules>
         <module>backend</module>
         <module>frontend</module>
+        <module>site</module>
     </modules>
 </project>
