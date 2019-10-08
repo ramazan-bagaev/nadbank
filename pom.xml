@@ -24,5 +24,6 @@
         <module>backend</module>
         <module>frontend</module>
         <module>site</module>
+        <module>interpreter</module>
     </modules>
 </project>

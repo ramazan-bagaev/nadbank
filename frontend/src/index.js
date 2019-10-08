@@ -10,7 +10,7 @@ class Something extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://192.168.0.18:9090/card')
+        axios.get('http://192.168.0.18:9090/debitCards')
         .then(response => this.setState({cards: response.data}))
         .catch(error => {console.log(error)})
     }
