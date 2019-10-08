@@ -1,5 +1,12 @@
 package com.kanasuki.nadbank.backend;
 
+import com.kanasuki.nadbank.backend.bank.Bank;
+import com.kanasuki.nadbank.backend.bank.BankRepository;
+import com.kanasuki.nadbank.backend.cashback.Cashback;
+import com.kanasuki.nadbank.backend.debit.DebitCard;
+import com.kanasuki.nadbank.backend.debit.DebitCardRepository;
+import com.kanasuki.nadbank.backend.product.Product;
+import com.kanasuki.nadbank.backend.product.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -15,14 +22,15 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner demo(CardRepository repository) {
+    public CommandLineRunner demo(DebitCardRepository repository, BankRepository bankRepository, ProductRepository productRepository) {
         return args -> {
-            repository.save(new Card("card1"));
-            repository.save(new Card("card2"));
-            repository.save(new Card("card3"));
-            repository.save(new Card("card4"));
-            repository.save(new Card("card5"));
-            repository.save(new Card("card6"));
+            Bank bank = new Bank("ny-bank");
+            bankRepository.save(bank);
+            repository.save(new DebitCard(1L, new Cashback(2D)));
+            productRepository.save(new Product("productName", bank));
+            /*bankRepository.save(new Bank("my-bank"));
+            bankRepository.save(new Bank("my-other-bank"));
+            bankRepository.save(new Bank("not-my-bank"));*/
         };
     }
 }

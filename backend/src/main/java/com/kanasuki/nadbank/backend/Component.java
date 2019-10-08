@@ -1,6 +1,11 @@
 package com.kanasuki.nadbank.backend;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import com.kanasuki.nadbank.backend.bank.Bank;
+import com.kanasuki.nadbank.backend.bank.BankRepository;
+import com.kanasuki.nadbank.backend.debit.DebitCard;
+import com.kanasuki.nadbank.backend.debit.DebitCardRepository;
+import com.kanasuki.nadbank.backend.product.Product;
+import com.kanasuki.nadbank.backend.product.ProductRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,16 +17,44 @@ import java.util.HashSet;
 public class Component {
 
     @Inject
-    private CardRepository cardRepository;
+    private DebitCardRepository debitCardRepository;
 
-    @RequestMapping(value = "/card", produces = "application/json")
-    public Collection<Card> index() {
-        Collection<Card> cards = new HashSet<>();
+    @Inject
+    private BankRepository bankRepository;
 
-        for(Card card: cardRepository.findAll()) {
-            cards.add(card);
+    @Inject
+    private ProductRepository productRepository;
+
+    @RequestMapping(value = "/banks", produces = "application/json")
+    public Collection<Bank> banks() {
+        Collection<Bank> banks = new HashSet<>();
+
+        for(Bank bank: bankRepository.findAll()) {
+            banks.add(bank);
         }
 
-        return cards;
+        return banks;
+    }
+
+    @RequestMapping(value = "/debitCards", produces = "application/json")
+    public Collection<DebitCard> debitCards() {
+        Collection<DebitCard> debitCards = new HashSet<>();
+
+        for(DebitCard debitCard: debitCardRepository.findAll()) {
+            debitCards.add(debitCard);
+        }
+
+        return debitCards;
+    }
+
+    @RequestMapping(value = "/products", produces = "application/json")
+    public Collection<Product> products() {
+        Collection<Product> products = new HashSet<>();
+
+        for(Product product: productRepository.findAll()) {
+            products.add(product);
+        }
+
+        return products;
     }
 }
