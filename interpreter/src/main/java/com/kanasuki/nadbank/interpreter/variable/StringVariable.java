@@ -1,15 +1,15 @@
 package com.kanasuki.nadbank.interpreter.variable;
 
-public class IntVariable implements Variable {
+public class StringVariable implements Variable {
 
-    private int value;
+    private String value;
 
-    public IntVariable(int value) {
+    public StringVariable(String value) {
         this.value = value;
     }
 
     @Override
     public String convertToString() {
-        return String.valueOf(value);
+        return value;
     }
 }
