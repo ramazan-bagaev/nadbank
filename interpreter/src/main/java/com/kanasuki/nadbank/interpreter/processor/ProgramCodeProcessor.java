@@ -1,20 +1,29 @@
 package com.kanasuki.nadbank.interpreter.processor;
 
-import com.kanasuki.nadbank.interpreter.command.Command;
-import com.kanasuki.nadbank.interpreter.command.assignment.AssigningStringCommand;
-import com.kanasuki.nadbank.interpreter.command.initializing.InitializingStringCommand;
+import com.kanasuki.nadbank.interpreter.processor.code.CodeProcessor;
+import com.kanasuki.nadbank.interpreter.processor.tree.Tree;
+import com.kanasuki.nadbank.interpreter.processor.tree.TreeProcessor;
 import com.kanasuki.nadbank.interpreter.program.Program;
-import com.kanasuki.nadbank.interpreter.program.SimpleProgram;
-import com.kanasuki.nadbank.interpreter.scope.Scope;
 
 public class ProgramCodeProcessor {
 
-    public Program processProgramCode(String programCode) {
-        Scope programScope = new Scope(null);
-        Command command1 = new InitializingStringCommand(programScope, "new-name", "new-value");
-        Command command2 = new AssigningStringCommand(programScope, "new-name", "new-new-name");
-        command1.setNextCommand(command2);
+    private TreeProcessor treeProcessor;
+    private CodeProcessor codeProcessor;
 
-        return new SimpleProgram(command1, programScope);
+
+    public ProgramCodeProcessor() {
+    }
+
+    public Program processProgramCode(String programCode) {
+        Tree tree = codeProcessor.processCode(programCode);
+
+        return treeProcessor.processTree(tree);
+    }
+
+    public void process(String programCode) {
+        String current = "";
+        for (char c: programCode.toCharArray()) {
+            current += c;
+        }
     }
 }

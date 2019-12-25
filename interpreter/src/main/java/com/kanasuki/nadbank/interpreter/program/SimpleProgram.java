@@ -20,15 +20,15 @@ public class SimpleProgram implements Program {
         while(current != null) {
             current.execute();
             if (programScope.isReturned()) {
-                return getReturnString();
+                return getResult();
             }
             current = current.getNextCommand();
         }
 
-        return getReturnString();
+        return getResult();
     }
 
-    private String getReturnString() {
+    private String getResult() {
         Variable returnVariable = programScope.getReturnVariable();
         return returnVariable != null ? returnVariable.convertToString() : "";
     }
